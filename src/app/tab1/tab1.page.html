@@ -3,7 +3,7 @@
     <ion-item lines="none">
 
       <ion-title class="ion-text-center">
-        Listado
+        Bienvenido: {{this.nombre_global}}
       </ion-title>
       <ion-button (click)="salir()" expand="block" fill="clear" shape="round">
         Salir
@@ -15,151 +15,69 @@
 
 </ion-header>
 
-<ion-content [fullscreen]="true">
 
+<ion-content>
 
+    <ion-grid>
+      <ion-row *ngFor="let item of data">
 
-
-  <ion-grid>
-    <ion-row>
-      <ion-col size="12">
-        <ion-card>
-          <ion-item lines="none">
-            <ion-label>
-              <!-- <b>ID Actividad:</b> {{item.idActividad}} <br> -->
-              <ion-item color="tertiary">
-                <ion-label text-wrap class="ion-text-center">
-                  <h1>Sim: 1</h1>
-                </ion-label>
-              </ion-item>
-              <b>Número de activación:</b>
-              <ion-text color="primary">12345</ion-text> <br>
-              <b>Compañia:</b>
-              <ion-text color="primary">AT&T</ion-text> <br>
-              <!-- <b>Progreso:</b> <ion-text color="primary">55</ion-text> <br>
-              <b>Estatus:</b> <ion-text color="primary">55 </ion-text><br>
-              <b>Impacto:</b> <ion-text color="primary">55</ion-text> <br>
-              <b>Entregable:</b> <ion-text color="primary">55</ion-text> <br>
-              <b>Fecha Inicio:</b> <ion-text color="primary">55</ion-text> <br>
-              <b>Fecha Fin:</b> <ion-text color="primary">55</ion-text> <br> -->
-            </ion-label>
-
-            <ion-button (click)="editar()" expand="block"  shape="round">
-              Editar
-            </ion-button>
+        <ion-col size="8">
+          <ion-card>
             
-          </ion-item>
+          <ion-label color="dark"><b>Nombre: </b></ion-label>{{item.nombre}}
+           <ion-label color="dark"><b>Compañia: </b></ion-label>{{item.compania}}<br>     
+          <ion-label color="dark"><b>Lote: </b></ion-label>{{item.lote}} 
+          <ion-label color="dark"><b>SIM: </b></ion-label>{{item.sim}}<br>
 
-        </ion-card>
-      </ion-col>
-
-
-      <ion-col size="12">
-        <ion-card>
-          <ion-item lines="none">
-            <ion-label>
-              <!-- <b>ID Actividad:</b> {{item.idActividad}} <br> -->
-              <ion-item color="tertiary">
-                <ion-label text-wrap class="ion-text-center">
-                  <h1>Sim: 2</h1>
-                </ion-label>
-              </ion-item>
-              <b>Número de activación:</b>
-              <ion-text color="primary">123456</ion-text> <br>
-              <b>Compañia:</b>
-              <ion-text color="primary">Movistar</ion-text> <br>
-              <!-- <b>Progreso:</b> <ion-text color="primary">55</ion-text> <br>
-              <b>Estatus:</b> <ion-text color="primary">55 </ion-text><br>
-              <b>Impacto:</b> <ion-text color="primary">55</ion-text> <br>
-              <b>Entregable:</b> <ion-text color="primary">55</ion-text> <br>
-              <b>Fecha Inicio:</b> <ion-text color="primary">55</ion-text> <br>
-              <b>Fecha Fin:</b> <ion-text color="primary">55</ion-text> <br> -->
-            </ion-label>
-
-            <ion-button (click)="editar()" expand="block"  shape="round">
-              Editar
-            </ion-button>
-          </ion-item>
-
-        </ion-card>
-      </ion-col>
-
-
-
-      <ion-col size="12">
-        <ion-card>
-          <ion-item lines="none">
-            <ion-label>
-              <!-- <b>ID Actividad:</b> {{item.idActividad}} <br> -->
-              <ion-item color="tertiary">
-                <ion-label text-wrap class="ion-text-center">
-                  <h1>Sim: 3</h1>
-                </ion-label>
-              </ion-item>
-              <b>Número de activación:</b>
-              <ion-text color="primary">1234567</ion-text> <br>
-              <b>Compañia:</b>
-              <ion-text color="primary">Telcel</ion-text> <br>
-              <!-- <b>Progreso:</b> <ion-text color="primary">55</ion-text> <br>
-              <b>Estatus:</b> <ion-text color="primary">55 </ion-text><br>
-              <b>Impacto:</b> <ion-text color="primary">55</ion-text> <br>
-              <b>Entregable:</b> <ion-text color="primary">55</ion-text> <br>
-              <b>Fecha Inicio:</b> <ion-text color="primary">55</ion-text> <br>
-              <b>Fecha Fin:</b> <ion-text color="primary">55</ion-text> <br> -->
-            </ion-label>
-            <ion-button (click)="editar()" expand="block"  shape="round">
-              Editar
-            </ion-button>
-          </ion-item>
-
-        </ion-card>
-      </ion-col>
-
-
+          <ion-label color="dark"><b>Clave de activacion: </b></ion-label>{{item.c_activacion}}<br>
       
+          <ion-button (click)="editar(item.sim)" expand="block" shape="round">
+            Editar
+          </ion-button>
+        
+      <!--      <ion-label color="dark"><b>Inc. retencion: </b></ion-label>{{item.INCREMENTA_RETENCION}}<br>
+        <ion-label color="dark"><b>Inc. ARPU: </b></ion-label>{{item.INCREMENTA_ARPU}} 
+          <ion-label color="dark"><b>Impacto: </b></ion-label>{{item.IMPACTO}}<br>
 
-      
-      <ion-col size="12">
-        <ion-card>
-          <ion-item lines="none">
-            <ion-label>
-              <!-- <b>ID Actividad:</b> {{item.idActividad}} <br> -->
-              <ion-item color="tertiary">
-                <ion-label text-wrap class="ion-text-center">
-                  <h1>Sim: 4</h1>
-                </ion-label>
-              </ion-item>
-              <b>Número de activación:</b>
-              <ion-text color="primary">12345678</ion-text> <br>
-              <b>Compañia:</b>
-              <ion-text color="primary">Telcel</ion-text> <br>
-              <!-- <b>Progreso:</b> <ion-text color="primary">55</ion-text> <br>
-              <b>Estatus:</b> <ion-text color="primary">55 </ion-text><br>
-              <b>Impacto:</b> <ion-text color="primary">55</ion-text> <br>
-              <b>Entregable:</b> <ion-text color="primary">55</ion-text> <br>
-              <b>Fecha Inicio:</b> <ion-text color="primary">55</ion-text> <br>
-              <b>Fecha Fin:</b> <ion-text color="primary">55</ion-text> <br> -->
-            </ion-label>
+          
+          <ion-label color="dark"><b>Dec. costos: </b></ion-label>{{item.DECREMENTA_COSTOS}}
+          <ion-label color="dark"><b>Cumplimiento regulatorio: </b></ion-label>{{item.CUMPLIMIENTO_REGULATORIO}}<br>
+          <ion-label color="dark"><b>Construccion de: </b></ion-label>{{item.F_INICIO_CONSTRUCCION}}
+          <ion-label color="dark"><b>a: </b></ion-label>{{item.F_FIN_CONSTRUCCION}}<br>
+          <ion-label color="dark"><b>Inicio UAT: </b></ion-label>{{item.F_INICIO_PRUEBAS_UAT}}
+          <ion-label color="dark"><b>a: </b></ion-label>{{item.F_FIN_PRUEBAS_UAT}}<br>
 
-            <ion-button (click)="editar()" expand="block"  shape="round">
-              Editar
-            </ion-button>
-          </ion-item>
-
+          <ion-label color="dark"><b>Go Live: </b></ion-label>{{item.F_INICIO_GO_LIVE}}<br> -->
         </ion-card>
-      </ion-col>
+        </ion-col>
 
+        <!-- <ion-col size="6">
+          <ion-list>
+            <ion-radio-group (ionChange)="cambiar($event,item.idProject)">
+              <ion-list-header>
+                <ion-label class="ion-text-center">
+                  Respuestas
+                </ion-label>
+              </ion-list-header>
+              <ion-item>
+                <ion-label>Aprobar</ion-label>
+                <ion-radio value="Aprobar" color="success"></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label>No Aprobar</ion-label>
+                <ion-radio value="No Aprobar" color="danger"></ion-radio>
+              </ion-item>
+            </ion-radio-group>
 
+            <ion-item>
+              <ion-label>Comentarios:</ion-label>
+              <ion-input [(ngModel)]="item.comentarios" value=""></ion-input>
+            </ion-item>
 
-      
-
-
-
-    </ion-row>
-  </ion-grid>
-
-
-
-
+    
+          </ion-list>            
+        </ion-col> -->
+      </ion-row>     
+    </ion-grid>
 
 </ion-content>
