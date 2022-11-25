@@ -1,0 +1,7 @@
+{
+  "name": "angular-chips",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

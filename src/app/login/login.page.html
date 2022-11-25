@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="ion-text-center">Login</ion-title>
+  </ion-toolbar>
+
+
+</ion-header>
+
+<ion-content>
+
+
+  <ion-card>
+    <ion-card-content>
+
+      
+
+
+      <form [formGroup]="loginForm" (ngSubmit)="inicio()" class="form" action="">
+        <ion-item lines="none">
+
+          <ion-icon name="call-outline" color="primary"></ion-icon>
+          <ion-label>Telefono:</ion-label>
+          <ion-input required formControlName="telefono" type="text" placeholder="Ingresa tu telefono"></ion-input>
+        </ion-item>
+
+        <ion-item lines="none">
+          <ion-icon name="key-outline" color="warning"></ion-icon>
+          <ion-label>Password:</ion-label>
+          <ion-input required formControlName="password" type="text" placeholder="Ingresa tu password"></ion-input>
+        </ion-item>
+
+
+
+        <ion-button [disabled]="!loginForm.valid" type="submit" expand="block" shape="round">
+          Iniciar Sesión
+        </ion-button>
+      </form>
+
+    </ion-card-content>
+
+
+
+
+  </ion-card>
+
+</ion-content>
