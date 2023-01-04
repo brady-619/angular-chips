@@ -20,6 +20,10 @@ const routes: Routes = [
         loadChildren: () => import('../tab3/tab3.module').then(m => m.Tab3PageModule)
       },
       {
+        path: 'sucursal',
+        loadChildren: () => import('../sucursal/sucursal.module').then(m => m.SucursalPageModule)
+      },
+      {
         path: '',
         redirectTo: '/login',
         pathMatch: 'full'

@@ -24,16 +24,20 @@
         <ion-col size="8">
           <ion-card>
             
-          <ion-label color="dark"><b>Nombre: </b></ion-label>{{item.nombre}}
-           <ion-label color="dark"><b>Compañia: </b></ion-label>{{item.compania}}<br>     
-          <ion-label color="dark"><b>Lote: </b></ion-label>{{item.lote}} 
-          <ion-label color="dark"><b>SIM: </b></ion-label>{{item.sim}}<br>
+          <ion-label color="dark"><b>Nombre: </b></ion-label>{{item.VENDEDOR}}
+           <ion-label color="dark"><b>Compañia: </b></ion-label>{{item.COMPANIA}}<br>     
+          <ion-label color="dark"><b>DN: </b></ion-label>{{item.DN}} 
+          <ion-label color="dark"><b>ICC: </b></ion-label>{{item.ICCI}}<br>
 
           <ion-label color="dark"><b>Clave de activacion: </b></ion-label>{{item.c_activacion}}<br>
       
           <ion-button (click)="editar(item.sim)" expand="block" shape="round">
             Editar
           </ion-button>
+
+
+
+
         
       <!--      <ion-label color="dark"><b>Inc. retencion: </b></ion-label>{{item.INCREMENTA_RETENCION}}<br>
         <ion-label color="dark"><b>Inc. ARPU: </b></ion-label>{{item.INCREMENTA_ARPU}} 
@@ -79,5 +83,11 @@
         </ion-col> -->
       </ion-row>     
     </ion-grid>
+
+
+    
+
+
+
 
 </ion-content>

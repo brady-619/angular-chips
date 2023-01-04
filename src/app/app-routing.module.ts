@@ -13,7 +13,15 @@ const routes: Routes = [
   {
     path: 'tab1',
     loadChildren: () => import('./tab1/tab1.module').then( m => m.Tab1PageModule)
-  }
+  },
+  {
+    path: 'sucursal',
+    loadChildren: () => import('./sucursal/sucursal.module').then( m => m.SucursalPageModule)
+  },
+  // {
+  //   path: 'modal-info',
+  //   loadChildren: () => import('./modal-info/modal-info.module').then( m => m.ModalInfoPageModule)
+  // }
 ];
 @NgModule({
   imports: [

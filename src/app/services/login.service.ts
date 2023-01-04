@@ -13,8 +13,8 @@ export class LoginService {
 
   Login(params:any):Promise<any> {
     return new Promise((resolve,reject) => {
-      this.http.post('https://6yficn23bg.execute-api.us-east-1.amazonaws.com/dev/sims_login',params).subscribe(resp => {
-        resolve(resp);
+      this.http.post('https://pvro1h66g4.execute-api.us-east-1.amazonaws.com/dev/login_apk',params).subscribe(respuesta => {
+        resolve(respuesta);
       },err=>{
         reject(err)
       })            
