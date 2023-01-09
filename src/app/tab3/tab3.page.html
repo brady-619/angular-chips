@@ -3,7 +3,7 @@
     <ion-item lines="none">
 
       <ion-title class="ion-text-center">
-        Listado de puntos de venta
+        Puntos de venta
       </ion-title>
       <ion-button (click)="salir()" expand="block" fill="clear" shape="round">
         Salir
@@ -23,19 +23,25 @@
       <ion-col size="10">
 
         <ion-card>
-          <ion-card-content>
+   
 
             
-            <ion-item>
-              <ion-label>Punto de Venta: {{item.nombre}}</ion-label>  
-              <ion-button (click)="editar()" expand="block" fill="clear" shape="round">
-                Editar
-              </ion-button>
-            </ion-item>
+            <ion-item-group>
+
+              <ion-item-divider>
+              <ion-label> <ion-icon slot="start" color="primary" name="storefront"></ion-icon> {{item.nombre}}</ion-label>  
+             
+    </ion-item-divider>
+  </ion-item-group>
+
+            
 
 
 
-          </ion-card-content>
+
+
+
+
         </ion-card>
 
       </ion-col>

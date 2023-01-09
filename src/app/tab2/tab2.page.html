@@ -1,16 +1,113 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Tab 2
-    </ion-title>
+    <ion-item lines="none">
+
+      <ion-title class="ion-text-center">
+        Busqueda P.V
+      </ion-title>
+      <ion-button (click)="salir()" expand="block" fill="clear" shape="round">
+        Salir
+      </ion-button>
+    </ion-item>
+
   </ion-toolbar>
+
+
 </ion-header>
 
 <ion-content [fullscreen]="true">
- 
-  
 
-  
+
+
+
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col size="10">
+
+        <ion-card>
+
+
+
+          <form [formGroup]="pvForm" (ngSubmit)="buscar()" class="form" action="">
+            <ion-item-group>
+
+              <ion-item-divider>
+                <ion-icon color="primary" slot="start" name="search"></ion-icon>
+                <ion-label position="inline">Punto de venta</ion-label>
+              </ion-item-divider>
+
+              <ion-item-divider>
+                <ion-input [(ngModel)]="pv" required formControlName="pv" placeholder="Ingresa P.V">
+                </ion-input>
+                <ion-button [disabled]="!pvForm.valid" type="submit" expand="block" shape="round">
+                  Buscar
+                </ion-button>
+              </ion-item-divider>
+
+            </ion-item-group>
+          </form>
+        </ion-card>
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+        
+
+                          <!-- <ion-card *ngIf="data">
+                    <ion-item>
+                      <ion-title >Sucursales</ion-title>
+                    </ion-item>
+                  </ion-card>
+                  <br> -->
+
+
+
+
+        <ion-grid fixed>
+          <ion-row *ngFor="let data of data">
+            <ion-col size="10">
+              <ion-card >
+
+                <ion-item-group>
+
+                  <ion-item-divider>
+<!-- 
+                    <b>P.V:</b> {{data.nombre}} -->
+
+                    <ion-icon slot="start" color="primary" name="storefront"></ion-icon> {{data.nombre}}
+
+                    <ion-button (click)="vender(data.nombre)"   slot="end" color="success" expand="block" shape="round">
+                      Vender
+                    </ion-button>
+
+                  </ion-item-divider>
+                </ion-item-group>
+
+                <!-- <ion-item-group>
+
+                  <ion-item-divider>
+
+                    <ion-button color="success" expand="block" shape="round">
+                      Vender
+                    </ion-button>
+                  </ion-item-divider>
+                </ion-item-group> -->
+
+
+
+
+              </ion-card>
+              
+            </ion-col>
+
+
+
+          </ion-row>
+        </ion-grid>
+
+
+
 
 
 

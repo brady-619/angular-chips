@@ -18,6 +18,10 @@ const routes: Routes = [
     path: 'sucursal',
     loadChildren: () => import('./sucursal/sucursal.module').then( m => m.SucursalPageModule)
   },
+  {
+    path: 'ventas-sims',
+    loadChildren: () => import('./ventas-sims/ventas-sims.module').then( m => m.VentasSimsPageModule)
+  },
   // {
   //   path: 'modal-info',
   //   loadChildren: () => import('./modal-info/modal-info.module').then( m => m.ModalInfoPageModule)

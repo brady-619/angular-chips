@@ -1,0 +1,45 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-item lines="none">
+
+      <ion-title class="ion-text-center">
+        P.V: {{pv}}
+      </ion-title>
+      <ion-button (click)="regresar()" expand="block" fill="clear" shape="round">
+        Regresar
+      </ion-button>
+    </ion-item>
+
+  </ion-toolbar>
+
+
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+
+
+
+<ion-grid fixed>
+  <ion-row>
+    <ion-col size="6"><ion-button (click)="att()" expand="block"  shape="round">
+      <b>AT&T</b>
+    </ion-button></ion-col>
+    <ion-col size="6"><ion-button (click)="bait()" expand="block" shape="round">
+      <b>BAIT</b>
+    </ion-button></ion-col>
+    <ion-col size="6"><ion-button (click)="movistar()" expand="block" shape="round">
+      <b>MOVISTAR</b>
+    </ion-button></ion-col>
+    <ion-col size="6"><ion-button (click)="unefon()" expand="block" shape="round">
+      <b>UNEFON</b>
+    </ion-button></ion-col>
+  </ion-row>
+</ion-grid>
+
+
+
+
+
+
+</ion-content>
