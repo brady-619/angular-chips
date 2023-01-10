@@ -17,7 +17,7 @@
   ion-card{
     margin: auto;
     width: 100%;
-    // border: 1px solid rgb(223, 8, 8);
+    //  border: 1px solid rgb(223, 8, 8);
     padding: 10px;
   
     --ion-background-color:  rgba(255, 255, 255, 0.877);
@@ -32,3 +32,10 @@
 
   }
 
+  ion-item{
+    --ion-background-color: linear-gradient( #fdfdfd,#ffffff);
+  
+  }
+
+
+  

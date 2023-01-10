@@ -20,22 +20,62 @@
 
 
 
-<ion-grid fixed>
-  <ion-row>
-    <ion-col size="6"><ion-button (click)="att()" expand="block"  shape="round">
-      <b>AT&T</b>
-    </ion-button></ion-col>
-    <ion-col size="6"><ion-button (click)="bait()" expand="block" shape="round">
-      <b>BAIT</b>
-    </ion-button></ion-col>
-    <ion-col size="6"><ion-button (click)="movistar()" expand="block" shape="round">
-      <b>MOVISTAR</b>
-    </ion-button></ion-col>
-    <ion-col size="6"><ion-button (click)="unefon()" expand="block" shape="round">
-      <b>UNEFON</b>
-    </ion-button></ion-col>
-  </ion-row>
-</ion-grid>
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col size="6"><ion-button (click)="att()" expand="block" shape="round">
+          <b>AT&T</b>
+        </ion-button></ion-col>
+      <ion-col size="6"><ion-button (click)="bait()" expand="block" shape="round">
+          <b>BAIT</b>
+        </ion-button></ion-col>
+      <ion-col size="6"><ion-button (click)="movistar()" expand="block" shape="round">
+          <b>MOVISTAR</b>
+        </ion-button></ion-col>
+      <ion-col size="6"><ion-button (click)="unefon()" expand="block" shape="round">
+          <b>UNEFON</b>
+        </ion-button></ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+
+
+  <ion-grid fixed>
+    <ion-row *ngFor="let data of sims">
+      <ion-col size="12">
+
+        <ion-item lines="none">
+
+
+
+          <ion-card>
+
+            
+            <ion-label>ICC: <b>{{data.ICCI}}</b></ion-label>
+
+            <ion-label>DN: <b>{{data.DN}}</b></ion-label>
+
+            <ion-label>COMPAÑIA: <b>{{data.COMPANIA}}</b></ion-label>
+              
+            
+            
+   
+          
+          </ion-card>
+
+            <ion-button (click)="vender(data.ICCI)" expand="block" shape="round">
+            Vender
+          </ion-button>   
+
+
+
+        </ion-item>
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
 
 
 

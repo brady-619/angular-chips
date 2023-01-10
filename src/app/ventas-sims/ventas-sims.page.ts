@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 import { GetSimsAVenderAttService } from '../services/get-sims-a-vender-att.service';
+
+import { UpdateVentaSimService } from 'src/app/services/update-venta-sim.service';
 
 
 @Component({
@@ -10,11 +13,12 @@ import { GetSimsAVenderAttService } from '../services/get-sims-a-vender-att.serv
 })
 export class VentasSimsPage implements OnInit {
 
-  constructor(private router: Router, private simsAtt: GetSimsAVenderAttService ) { }
+  constructor(private updateventasim: UpdateVentaSimService, private router: Router, private simsAtt: GetSimsAVenderAttService, public alertCtrl: AlertController) { }
 
   pv:any;
   data:any;
   vendedor:any;
+  sims:any;
 
   ngOnInit() {
   }
@@ -56,7 +60,7 @@ export class VentasSimsPage implements OnInit {
       
       console.log("resp",resp)
 
-      this.data = resp.data;
+      this.sims = resp.data;
 
       }).catch(error=> {
         /* Código a realizar cuando se rechaza la promesa */
@@ -77,6 +81,112 @@ export class VentasSimsPage implements OnInit {
   unefon(){
 
   }
+
+
+
+ async vender(sims:any){
+    console.log("Sim:", sims );
+
+
+    this.vendedor = await localStorage.getItem("nombre_global")
+    console.log("Vendedor:", this.vendedor);
+
+
+    const alert = await this.alertCtrl.create({
+      header: 'AVISO, seguro que deseas vender el SIM',
+      // subHeader: 'ICC:' +  sims  + '   al P.V:'  + this.pv,
+      message: '<b>ICC:</b><br/>' +  sims  + '   <br/><b>al P.V: </b><br/>'  + this.pv,
+      buttons: [
+        {
+            text: 'Cancel',
+            role: 'cancel',
+            cssClass: 'secondary',
+            handler: () => {
+                console.log('Confirm Cancel');
+            }
+        }, 
+        {
+            text: 'Ok',
+            // handler: (alertData) => { //takes the data 
+            //     console.log(alertData.name1);
+            // }
+            handler: async (alertData) => {
+              console.log('Se manda asigna la venta');
+
+              console.log("Sim:", sims );
+
+
+    this.vendedor = await localStorage.getItem("nombre_global")
+    console.log("Vendedor:", this.vendedor);
+
+
+
+
+    const params ={
+      ICCI: sims
+    }
+    
+    console.log("para",params)
+
+    await this.updateventasim.UpdateVentaSim(params).then(async resp =>  {
+      
+      console.log("resp",resp)
+
+      const alert = await this.alertCtrl.create({  
+        header: 'Venta registrada con éxito.',  
+        // subHeader: 'SubTitle',  
+        // message: 'This is an alert message',  
+        buttons: ['OK']  
+      });  
+      await alert.present();  
+
+      // refresh
+      this.att();
+
+
+
+      // this.sims = resp.data;
+
+      }).catch(async error=> {
+        /* Código a realizar cuando se rechaza la promesa */
+        console.log("NO paso chido",error)
+
+        const alert = await this.alertCtrl.create({  
+          header: 'Error en red.',  
+          // subHeader: 'SubTitle',  
+          // message: 'This is an alert message',  
+          buttons: ['OK']  
+        });  
+        await alert.present();  
+  
+
+
+
+
+
+      });
+
+
+
+
+          }
+        }
+    ]
+    });
+
+
+
+ 
+
+    await alert.present();
+  }
+
+
+    
+  
+
+
+
 
 
 
