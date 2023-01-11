@@ -18,7 +18,7 @@
 
 <ion-content>
 
-    <ion-grid>
+    <!-- <ion-grid>
       <ion-row *ngFor="let item of data">
 
         <ion-col size="8">
@@ -33,7 +33,7 @@
       
           <ion-button (click)="editar(item.sim)" expand="block" shape="round">
             Editar
-          </ion-button>
+          </ion-button> -->
 
 
 
@@ -52,10 +52,10 @@
           <ion-label color="dark"><b>a: </b></ion-label>{{item.F_FIN_PRUEBAS_UAT}}<br>
 
           <ion-label color="dark"><b>Go Live: </b></ion-label>{{item.F_INICIO_GO_LIVE}}<br> -->
-        </ion-card>
-        </ion-col>
-
-        <!-- <ion-col size="6">
+        <!-- </ion-card>
+        </ion-col> -->
+ <!--
+        <ion-col size="6">
           <ion-list>
             <ion-radio-group (ionChange)="cambiar($event,item.idProject)">
               <ion-list-header>
@@ -80,12 +80,41 @@
 
     
           </ion-list>            
-        </ion-col> -->
+        </ion-col> 
       </ion-row>     
     </ion-grid>
 
-
+-->
     
+
+<ion-grid fixed>
+  
+  <ion-row *ngFor="let item of data">
+    <ion-col size="12">
+
+<ion-card>
+  <ion-item-group>
+
+    <ion-item-divider>
+    
+  <label>ICC: {{item.ICCI}}</label>
+</ion-item-divider>
+<ion-item-divider>
+  <label>COMPANIA: {{item.COMPANIA}}</label>
+</ion-item-divider>
+<ion-item-divider>
+  <label>ESTATUS: {{item.ESTATUS}}</label>
+</ion-item-divider>
+</ion-item-group>
+
+   
+
+</ion-card>
+
+    </ion-col>
+    
+  </ion-row>
+</ion-grid>
 
 
 
