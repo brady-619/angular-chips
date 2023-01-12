@@ -2,8 +2,9 @@
   <ion-toolbar>
     <ion-item lines="none">
 
+
       <ion-title class="ion-text-center">
-        Bienvenido: {{this.nombre_global}}
+        <ion-icon  name="person" color="primary"></ion-icon>   {{this.nombre_global}} 
       </ion-title>
       <ion-button (click)="salir()" expand="block" fill="clear" shape="round">
         Salir
@@ -85,7 +86,50 @@
     </ion-grid>
 
 -->
+
+
+<ion-grid>
+  <ion-row *ngIf="data">
+    <ion-col size="10">
+
+<ion-card> 
+  <ion-card-content>
+    <ion-card-subtitle> Ventas de los últimos 7 días</ion-card-subtitle>
     
+  </ion-card-content>
+ <!-- <ion-label class="ion-text-wrap">Listado de ventas de los últimos 7 días</ion-label>  -->
+
+</ion-card>
+
+    </ion-col>
+    
+  </ion-row>
+</ion-grid>
+
+
+
+<ion-grid>
+  <ion-row *ngIf="data === false">
+    <ion-col size="10">
+
+<ion-card> 
+  <ion-card-content>
+    <ion-card-subtitle> Oh no! Aún no cuentas con ventas registradas</ion-card-subtitle>
+    
+  </ion-card-content>
+ <!-- <ion-label class="ion-text-wrap">Listado de ventas de los últimos 7 días</ion-label>  -->
+
+</ion-card>
+
+    </ion-col>
+    
+  </ion-row>
+</ion-grid>
+
+
+    
+
+
 
 <ion-grid fixed>
   
@@ -103,7 +147,10 @@
   <label>COMPANIA: {{item.COMPANIA}}</label>
 </ion-item-divider>
 <ion-item-divider>
-  <label>ESTATUS: {{item.ESTATUS}}</label>
+  <label>PV: {{item.PV}}</label>
+</ion-item-divider>
+<ion-item-divider>
+  <label>FECHA VENTA: {{item.FECHA_VENTA}}</label>
 </ion-item-divider>
 </ion-item-group>
 

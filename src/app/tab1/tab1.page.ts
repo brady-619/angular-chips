@@ -147,6 +147,9 @@ export class Tab1Page {
 
 
 async ionViewWillEnter(){
+
+
+
   this.nombre_global = await localStorage.getItem("nombre_global")
 
   const params = {

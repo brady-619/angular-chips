@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { GetSimsAVenderAttService } from '../services/get-sims-a-vender-att.service';
+import { InsertLogVentaSimsService  } from '../services/insert-log-venta-sims.service';
 
 import { UpdateVentaSimService } from 'src/app/services/update-venta-sim.service';
 
@@ -13,7 +14,7 @@ import { UpdateVentaSimService } from 'src/app/services/update-venta-sim.service
 })
 export class VentasSimsPage implements OnInit {
 
-  constructor(private updateventasim: UpdateVentaSimService, private router: Router, private simsAtt: GetSimsAVenderAttService, public alertCtrl: AlertController) { }
+  constructor(private insertLogSims : InsertLogVentaSimsService, private updateventasim: UpdateVentaSimService, private router: Router, private simsAtt: GetSimsAVenderAttService, public alertCtrl: AlertController) { }
 
   pv: any;
   data: any;
@@ -155,19 +156,33 @@ export class VentasSimsPage implements OnInit {
   }
 
 
+  async vender(ICCI: any, DN:any, COMPANIA:any) {
 
-  async vender(sims: any) {
-    console.log("Sim:", sims);
-
-
+    // OBTENEMOS INFO A REQUEST LOG
+    console.log("Sim:", ICCI, DN,COMPANIA);
     this.vendedor = await localStorage.getItem("nombre_global")
     console.log("Vendedor:", this.vendedor);
+    console.log("Pv a vender", this.pv)
+
+    // 👇️ const now: Date
+    var todayDate = new Date().toISOString().slice(0, 10);
+    console.log(todayDate);
+                
+              const request = {
+                ICCI: ICCI,
+                DN: DN,
+                VENDEDOR: this.vendedor,
+                PV: this.pv,
+                COMPANIA: COMPANIA,
+                FECHA_VENTA: todayDate
+              }
+
 
 
     const alert = await this.alertCtrl.create({
       header: 'AVISO, seguro que deseas vender el SIM',
       // subHeader: 'ICC:' +  sims  + '   al P.V:'  + this.pv,
-      message: '<b>ICC:</b><br/>' + sims + '   <br/><b>al P.V: </b><br/>' + this.pv,
+      message: '<b>ICC:</b><br/>' + ICCI + '   <br/><b>al P.V: </b><br/>' + this.pv,
       buttons: [
         {
           text: 'Cancel',
@@ -185,7 +200,7 @@ export class VentasSimsPage implements OnInit {
           handler: async (alertData) => {
             console.log('Se manda asigna la venta');
 
-            console.log("Sim:", sims);
+            console.log("Sim:", ICCI);
 
 
             this.vendedor = await localStorage.getItem("nombre_global")
@@ -195,7 +210,7 @@ export class VentasSimsPage implements OnInit {
 
 
             const params = {
-              ICCI: sims
+              ICCI: ICCI
             }
 
             console.log("para", params)
@@ -203,6 +218,31 @@ export class VentasSimsPage implements OnInit {
             await this.updateventasim.UpdateVentaSim(params).then(async resp => {
 
               console.log("resp", resp)
+
+
+
+
+
+
+
+
+              // Se crea el log de venta CON REQUEST HECHO ANTES
+
+              await this.insertLogSims.InsertLogVentaSims(request).then(async resp => {
+
+                console.log("la resp del servicio log es:", resp)
+                this.data = resp.data;
+            
+                console.log(this.data)
+              });
+
+
+
+
+
+
+
+
 
               const alert = await this.alertCtrl.create({
                 header: 'Venta registrada con éxito.',
