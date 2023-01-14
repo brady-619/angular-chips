@@ -38,9 +38,9 @@ export class Tab2Page {
 
   async buscar() {
 
-    console.log("val:", this.pv+'%')
+    // console.log("val:", this.pv+'%')
     this.nombre_global = await localStorage.getItem("nombre_global")
-    console.log("nomb g:", this.nombre_global)
+    // console.log("nomb g:", this.nombre_global)
 
     const params = {
       nombre: this.pv+'%',
@@ -50,10 +50,10 @@ export class Tab2Page {
     /*obteniendo clientes*/
     await this.getPV.GetSearchPV(params).then(async resp => {
 
-      console.log("la resp del servicio direccione es:", resp)
+      // console.log("la resp del servicio direccione es:", resp)
       this.data = resp.data;
 
-      console.log(this.data)
+      // console.log(this.data)
       // let userList2 = this.data;
       // console.log("ul2", userList2)
       // localStorage.setItem("lista", userList2)
@@ -81,7 +81,7 @@ export class Tab2Page {
 
 
   async vender(pv:any){
-    console.log("El pv a vender es", pv)
+    // console.log("El pv a vender es", pv)
 
     localStorage.setItem("pv_a_vender",pv)
 

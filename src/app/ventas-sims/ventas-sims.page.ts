@@ -36,14 +36,14 @@ export class VentasSimsPage implements OnInit {
 
   async ionViewWillEnter() {
     this.pv = await localStorage.getItem("pv_a_vender")
-    console.log("Pv a vender", this.pv)
+    // console.log("Pv a vender", this.pv)
   }
 
 
 
 
   async att() {
-    console.log("Ingresaste a AT&T")
+    // console.log("Ingresaste a AT&T")
 
 
     this.vendedor = await localStorage.getItem("nombre_global")
@@ -55,17 +55,17 @@ export class VentasSimsPage implements OnInit {
 
     }
 
-    console.log("para", params)
+    // console.log("para", params)
 
     await this.simsAtt.GetSimsAVenderAtt(params).then(resp => {
 
-      console.log("resp", resp)
+      // console.log("resp", resp)
 
       this.sims = resp.data;
 
     }).catch(error => {
       /* Código a realizar cuando se rechaza la promesa */
-      console.log("NO paso chido", error)
+      // console.log("NO paso chido", error)
     });
 
 
@@ -74,7 +74,7 @@ export class VentasSimsPage implements OnInit {
   }
 
   async bait() {
-    console.log("Ingresaste a BAIT")
+    // console.log("Ingresaste a BAIT")
 
 
     this.vendedor = await localStorage.getItem("nombre_global")
@@ -86,22 +86,22 @@ export class VentasSimsPage implements OnInit {
 
     }
 
-    console.log("para", params)
+    // console.log("para", params)
 
     await this.simsAtt.GetSimsAVenderAtt(params).then(resp => {
 
-      console.log("resp", resp)
+      // console.log("resp", resp)
 
       this.sims = resp.data;
 
     }).catch(error => {
       /* Código a realizar cuando se rechaza la promesa */
-      console.log("NO paso chido", error)
+      // console.log("NO paso chido", error)
     });
 
   }
   async movistar() {
-    console.log("Ingresaste a MOVISTAR")
+    // console.log("Ingresaste a MOVISTAR")
 
 
     this.vendedor = await localStorage.getItem("nombre_global")
@@ -113,11 +113,11 @@ export class VentasSimsPage implements OnInit {
 
     }
 
-    console.log("para", params)
+    // console.log("para", params)
 
     await this.simsAtt.GetSimsAVenderAtt(params).then(resp => {
 
-      console.log("resp", resp)
+      // console.log("resp", resp)
 
       this.sims = resp.data;
 
@@ -128,7 +128,7 @@ export class VentasSimsPage implements OnInit {
 
   }
   async unefon() {
-    console.log("Ingresaste a UNEFON")
+    // console.log("Ingresaste a UNEFON")
 
 
     this.vendedor = await localStorage.getItem("nombre_global")
@@ -140,17 +140,17 @@ export class VentasSimsPage implements OnInit {
 
     }
 
-    console.log("para", params)
+    // console.log("para", params)
 
     await this.simsAtt.GetSimsAVenderAtt(params).then(resp => {
 
-      console.log("resp", resp)
+      // console.log("resp", resp)
 
       this.sims = resp.data;
 
     }).catch(error => {
       /* Código a realizar cuando se rechaza la promesa */
-      console.log("NO paso chido", error)
+      // console.log("NO paso chido", error)
     });
 
   }
@@ -159,14 +159,14 @@ export class VentasSimsPage implements OnInit {
   async vender(ICCI: any, DN:any, COMPANIA:any) {
 
     // OBTENEMOS INFO A REQUEST LOG
-    console.log("Sim:", ICCI, DN,COMPANIA);
+    // console.log("Sim:", ICCI, DN,COMPANIA);
     this.vendedor = await localStorage.getItem("nombre_global")
-    console.log("Vendedor:", this.vendedor);
-    console.log("Pv a vender", this.pv)
+    // console.log("Vendedor:", this.vendedor);
+    // console.log("Pv a vender", this.pv)
 
     // 👇️ const now: Date
     var todayDate = new Date().toISOString().slice(0, 10);
-    console.log(todayDate);
+    // console.log(todayDate);
                 
               const request = {
                 ICCI: ICCI,
@@ -182,7 +182,7 @@ export class VentasSimsPage implements OnInit {
     const alert = await this.alertCtrl.create({
       header: 'AVISO, seguro que deseas vender el SIM',
       // subHeader: 'ICC:' +  sims  + '   al P.V:'  + this.pv,
-      message: '<b>ICC:</b><br/>' + ICCI + '   <br/><b>al P.V: </b><br/>' + this.pv,
+      message: '<b>ICC:</b><br/>' + ICCI + '   <br/><b>al PDV: </b><br/>' + this.pv +  '   <br/><b>de compañia: </b><br/>' + COMPANIA,
       buttons: [
         {
           text: 'Cancel',
@@ -200,11 +200,11 @@ export class VentasSimsPage implements OnInit {
           handler: async (alertData) => {
             console.log('Se manda asigna la venta');
 
-            console.log("Sim:", ICCI);
+            // console.log("Sim:", ICCI);
 
 
             this.vendedor = await localStorage.getItem("nombre_global")
-            console.log("Vendedor:", this.vendedor);
+            // console.log("Vendedor:", this.vendedor);
 
 
 
@@ -213,11 +213,11 @@ export class VentasSimsPage implements OnInit {
               ICCI: ICCI
             }
 
-            console.log("para", params)
+            // console.log("para", params)
 
             await this.updateventasim.UpdateVentaSim(params).then(async resp => {
 
-              console.log("resp", resp)
+              // console.log("resp", resp)
 
 
 
@@ -230,10 +230,10 @@ export class VentasSimsPage implements OnInit {
 
               await this.insertLogSims.InsertLogVentaSims(request).then(async resp => {
 
-                console.log("la resp del servicio log es:", resp)
+                // console.log("la resp del servicio log es:", resp)
                 this.data = resp.data;
             
-                console.log(this.data)
+                // console.log(this.data)
               });
 
 

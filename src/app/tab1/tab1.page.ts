@@ -29,8 +29,8 @@ export class Tab1Page {
     this.nombre_global = await localStorage.getItem("nombre_global")
 
 
-    console.log("idvendedor", this.idvendedor_global)
-    console.log("nomb vendedor", this.nombre_global)
+    // console.log("idvendedor", this.idvendedor_global)
+    // console.log("nomb vendedor", this.nombre_global)
 
 
     // await this.getlistado();
@@ -159,10 +159,10 @@ async ionViewWillEnter(){
   /*obteniendo clientes*/
   await this.getvendidos.GetSimsVendidas(params).then(async resp => {
 
-    console.log("la resp del servicio direccione es:", resp)
+    // console.log("la resp del servicio direccione es:", resp)
     this.data = resp.data;
 
-    console.log(this.data)
+    // console.log(this.data)
     // let userList2 = this.data;
     // console.log("ul2", userList2)
     // localStorage.setItem("lista", userList2)

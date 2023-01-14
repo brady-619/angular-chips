@@ -29,7 +29,7 @@ this.obtener();
 
     await this.getPuntosDeVenta.GetPuntosVenta(params).then(async resp =>  {
       
-      console.log("resp",resp)
+      // console.log("resp",resp)
 
       this.data = resp.data;
 

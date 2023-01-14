@@ -3,7 +3,7 @@
     <ion-item lines="none">
 
       <ion-title class="ion-text-center">
-        Busqueda P.V
+        Busqueda PDV
       </ion-title>
       <ion-button (click)="salir()" expand="block" fill="clear" shape="round">
         Salir
@@ -31,13 +31,13 @@
           <form [formGroup]="pvForm" (ngSubmit)="buscar()" class="form" action="">
             <ion-item-group>
 
-              <ion-item-divider>
+              <!-- <ion-item-divider>
                 <ion-icon color="primary" slot="start" name="search"></ion-icon>
                 <ion-label position="inline">Punto de venta</ion-label>
-              </ion-item-divider>
+              </ion-item-divider> -->
 
               <ion-item-divider>
-                <ion-input [(ngModel)]="pv" required formControlName="pv" placeholder="Ingresa P.V">
+                <ion-input [(ngModel)]="pv" required formControlName="pv" placeholder="Ingresa Punto de Venta">
                 </ion-input>
                 <ion-button [disabled]="!pvForm.valid" type="submit" expand="block" shape="round">
                   Buscar
