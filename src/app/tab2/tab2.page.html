@@ -37,7 +37,7 @@
               </ion-item-divider> -->
 
               <ion-item-divider>
-                <ion-input [(ngModel)]="pv" required formControlName="pv" placeholder="Ingresa Punto de Venta">
+                <ion-input [(ngModel)]="pv" required formControlName="pv" placeholder="Ingresa PDV">
                 </ion-input>
                 <ion-button [disabled]="!pvForm.valid" type="submit" expand="block" shape="round">
                   Buscar
@@ -78,7 +78,7 @@
                     <ion-icon slot="start" color="primary" name="storefront"></ion-icon> {{data.nombre}}
 
                     <ion-button (click)="vender(data.nombre)"   slot="end" color="success" expand="block" shape="round">
-                      Vender
+                      Asignar
                     </ion-button>
 
                   </ion-item-divider>

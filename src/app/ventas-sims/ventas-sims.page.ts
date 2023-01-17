@@ -3,8 +3,10 @@ import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { GetSimsAVenderAttService } from '../services/get-sims-a-vender-att.service';
 import { InsertLogVentaSimsService  } from '../services/insert-log-venta-sims.service';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { UpdateVentaSimService } from 'src/app/services/update-venta-sim.service';
+import { GetSims5Service } from 'src/app/services/get-sims-5.service';
 
 
 @Component({
@@ -14,12 +16,24 @@ import { UpdateVentaSimService } from 'src/app/services/update-venta-sim.service
 })
 export class VentasSimsPage implements OnInit {
 
-  constructor(private insertLogSims : InsertLogVentaSimsService, private updateventasim: UpdateVentaSimService, private router: Router, private simsAtt: GetSimsAVenderAttService, public alertCtrl: AlertController) { }
+  constructor(private getsims5: GetSims5Service, private insertLogSims : InsertLogVentaSimsService, private updateventasim: UpdateVentaSimService, private router: Router, private simsAtt: GetSimsAVenderAttService, public alertCtrl: AlertController) { }
 
   pv: any;
   data: any;
   vendedor: any;
   sims: any;
+  num_sim:any;
+  sim:any;
+
+
+
+
+
+  simForm = new FormGroup({
+    num_sim: new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(5)])
+  });
+
+
 
   ngOnInit() {
   }
@@ -296,10 +310,58 @@ export class VentasSimsPage implements OnInit {
 
 
 
+// async bsim(sim:any){
+//   console.log("La sim enviada es", sim);
+  
+
+// }
+
+
+async buscar() {
+
+console.log(this.num_sim);
+this.vendedor = await localStorage.getItem("nombre_global")
+console.log(this.vendedor);
+
+const params5 = {
+  vendedor: this.vendedor, 
+  icci: '%'+this.num_sim+'F'
+
+}
+
+await this.getsims5.GetSims5(params5).then(async resp => {
+
+  console.log("resp", resp)
+
+  this.sims = resp.data;
 
 
 
 
+
+
+
+
+}).catch(error => {
+  /* Código a realizar cuando se rechaza la promesa */
+  console.log("NO paso chido", error)
+});
+
+
+
+
+
+}
+
+
+
+
+async scan(){
+  console.log("scan");
+
+  
+  
+}
 
 
 }

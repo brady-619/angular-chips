@@ -3,7 +3,7 @@
     <ion-item lines="none">
 
       <ion-title class="ion-text-center">
-        P.V: {{pv}}
+        PDV: {{pv}}
       </ion-title>
       <ion-button (click)="regresar()" expand="block" fill="clear" shape="round">
         Regresar
@@ -16,6 +16,49 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
+
+
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col size="12">
+        <ion-card >
+          <form [formGroup]="simForm" (ngSubmit)="buscar()" class="form" action="">
+            <ion-item-group>
+
+              <!-- <ion-item-divider>
+                <ion-icon color="primary" slot="start" name="search"></ion-icon>
+                <ion-label position="inline">Punto de venta</ion-label>
+              </ion-item-divider> -->
+
+              <ion-item-divider>
+                <ion-input [(ngModel)]="num_sim" required formControlName="num_sim" placeholder="Ingresa ultimos 5 digitos" maxlength="5"  >
+                </ion-input>
+                <ion-button [disabled]="!simForm.valid" type="submit" expand="block" shape="round">
+                  Buscar
+                </ion-button>
+
+
+
+
+              </ion-item-divider>
+
+            </ion-item-group>
+          </form>
+
+          
+          <ion-button (click)="scan()" expand="block"   shape="round">
+            Scan
+           </ion-button>
+
+        </ion-card>
+
+      </ion-col>
+      
+    </ion-row>
+  </ion-grid>
+
+
+
 
 
 
@@ -36,6 +79,10 @@
         </ion-button></ion-col>
     </ion-row>
   </ion-grid>
+
+
+  
+
 
 
 
@@ -64,7 +111,7 @@
           </ion-card>
 
             <ion-button (click)="vender(data.ICCI, data.DN, data.COMPANIA)" expand="block" shape="round">
-            Vender
+            Asignar
           </ion-button>   
 
 
