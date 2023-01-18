@@ -7,7 +7,12 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { UpdateVentaSimService } from 'src/app/services/update-venta-sim.service';
 import { GetSims5Service } from 'src/app/services/get-sims-5.service';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+import { GetSearchIccScanService } from 'src/app/services/get-search-icc-scan.service';
 
+//npm i phonegap-plugin-barcodescanner --force 
+// npm i @ionic-native/barcode-scanner --force  
+// % ionic cap sync     
 
 @Component({
   selector: 'app-ventas-sims',
@@ -16,7 +21,7 @@ import { GetSims5Service } from 'src/app/services/get-sims-5.service';
 })
 export class VentasSimsPage implements OnInit {
 
-  constructor(private getsims5: GetSims5Service, private insertLogSims : InsertLogVentaSimsService, private updateventasim: UpdateVentaSimService, private router: Router, private simsAtt: GetSimsAVenderAttService, public alertCtrl: AlertController) { }
+  constructor(private getsearchicc: GetSearchIccScanService, private getsims5: GetSims5Service, private insertLogSims : InsertLogVentaSimsService, private updateventasim: UpdateVentaSimService, private router: Router, private simsAtt: GetSimsAVenderAttService, public alertCtrl: AlertController,private barcodeScanner: BarcodeScanner ) { }
 
   pv: any;
   data: any;
@@ -27,6 +32,7 @@ export class VentasSimsPage implements OnInit {
 
 
 
+  code: any;
 
 
   simForm = new FormGroup({
@@ -335,6 +341,27 @@ await this.getsims5.GetSims5(params5).then(async resp => {
 
   this.sims = resp.data;
 
+  if (this.sims == undefined || this.sims == false) {
+    const alert = await this.alertCtrl.create({
+      header: 'No se encontro SIM con ICC:' + this.num_sim,
+      // subHeader: 'SubTitle',  
+      // message: 'This is an alert message',  
+      buttons: ['OK']
+    });
+    this.sims = false;
+
+    await alert.present();
+  
+  }
+  else{
+    
+
+  this.sims = resp.data;
+  }
+
+
+  
+
 
 
 
@@ -359,7 +386,73 @@ await this.getsims5.GetSims5(params5).then(async resp => {
 async scan(){
   console.log("scan");
 
-  
+  // const alert = await this.alertCtrl.create({
+  //         header: 'click'+ this.sims,
+  //         // subHeader: 'SubTitle',  
+  //         // message: 'This is an alert message',  
+  //         buttons: ['OK']
+  //       });
+  //       await alert.present();
+      // undefined false
+
+
+this.vendedor = await localStorage.getItem("nombre_global")
+// console.log(this.vendedor);
+
+await this.barcodeScanner.scan().then(async barcodeData => {
+    console.log('Barcode data', barcodeData);
+    this.code = barcodeData.text;
+    console.log('Barcode data', this.code);
+
+    
+
+
+const paramsqr = {
+  vendedor: this.vendedor, 
+  icci: this.code
+
+}
+
+
+    await this.getsearchicc.GetSearchIccScan(paramsqr).then(async resp => {
+      console.log("resp", resp)
+    
+       this.sims = resp.data;
+
+      // EVALUA QUE SEA MAS DE 3 DIGITOS
+      if (this.sims == undefined || this.sims == false) {
+        const alert = await this.alertCtrl.create({
+          header: 'No se encontro SIM con ICC:' + this.code,
+          // subHeader: 'SubTitle',  
+          // message: 'This is an alert message',  
+          buttons: ['OK']
+        });
+        this.sims = false;
+
+        await alert.present();
+      
+      }
+      else{
+        
+
+      this.sims = resp.data;
+      }
+
+    }).catch(error => {
+      /* Código a realizar cuando se rechaza la promesa */
+      console.log("NO paso chido", error)
+    });
+
+    
+
+
+
+
+
+
+   }).catch(err => {
+       console.log('Error', err);
+   });
   
 }
 

@@ -1,6 +1,6 @@
 {
-	"appId": "io.ionic.starter",
-	"appName": "angular-chips",
-	"webDir": "www",
-	"bundledWebRuntime": false
+  "appId": "io.ionic.starter",
+  "appName": "cellular_planet",
+  "webDir": "www",
+  "bundledWebRuntime": false
 }

@@ -2,7 +2,7 @@
   <ion-toolbar>
     <ion-item lines="none">
 
-      <ion-title class="ion-text-center">
+      <ion-title class="ion-text-center"> <ion-icon name="planet-outline" color="danger"></ion-icon>
         Alta de punto de venta
       </ion-title>
       <ion-button (click)="salir()" expand="block" fill="clear" shape="round">
@@ -47,12 +47,12 @@
 
       <ion-item>
         <ion-label position="floating">Telefono 1</ion-label>
-        <ion-input required formControlName="telefono1" type="text" placeholder="Ingresa tu telefono" type="number" ></ion-input>
+        <ion-input required formControlName="telefono" type="text" placeholder="Ingresa tu telefono" type="number" ></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label position="floating">Telefono 2</ion-label>
-        <ion-input required formControlName="telefono2" placeholder="Telefono 2" type="number" type="number" ></ion-input>
+        <ion-input required formControlName="telefonos" placeholder="Telefono 2" type="number" type="number" ></ion-input>
       </ion-item>
 
       <ion-item>
