@@ -17,6 +17,7 @@ export class Tab2Page {
   pv:any;
   nombre_global: any;
   data:any;
+  on:any;
 
 
   pvForm = new FormGroup({
@@ -38,6 +39,8 @@ export class Tab2Page {
 
   async buscar() {
 
+    this.on= true;
+
     // console.log("val:", this.pv+'%')
     this.nombre_global = await localStorage.getItem("nombre_global")
     // console.log("nomb g:", this.nombre_global)
@@ -58,6 +61,8 @@ export class Tab2Page {
       // console.log("ul2", userList2)
       // localStorage.setItem("lista", userList2)
 
+
+      this.on= false;
 
       if (this.data == false) {
         this.data = null;

@@ -15,6 +15,7 @@ export class LoginPage implements OnInit {
 
   nombre:any;
   idvendedor:any;
+  on:any;
 
   constructor(private router: Router, private login: LoginService, public alertCtrl: AlertController) { }
 
@@ -36,6 +37,9 @@ export class LoginPage implements OnInit {
   async inicio(){
 
     console.log("click")
+
+    this.on= true;
+    
 
 
     if(this.loginForm.value.telefono !='' || this.loginForm.value.password !='')
@@ -61,7 +65,7 @@ export class LoginPage implements OnInit {
         // console.log("nombre", this.nombre)
         /*global*/
         localStorage.setItem("nombre_global",this.nombre)
-  
+        this.on= false;
   
   
         this.idvendedor = respuesta.data[0].idvendedor;
@@ -74,6 +78,7 @@ export class LoginPage implements OnInit {
 
       }
       else{
+        this.on= false;
 
         const alert = await this.alertCtrl.create({  
           header: 'Usuario no registrado o inactivo.',  
@@ -89,6 +94,8 @@ export class LoginPage implements OnInit {
         localStorage.setItem("idvendedor_global","")
 
       }
+
+      
     
       });
     

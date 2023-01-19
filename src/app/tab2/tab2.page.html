@@ -46,7 +46,13 @@
 
             </ion-item-group>
           </form>
+          <ion-item-divider *ngIf="on == true" >
+            <!--  -->
+            <ion-spinner  color="primary" name="circular"></ion-spinner>
+          </ion-item-divider>
         </ion-card>
+
+
 
       </ion-col>
     </ion-row>
@@ -66,7 +72,7 @@
 
         <ion-grid fixed>
           <ion-row *ngFor="let data of data">
-            <ion-col size="10">
+            <ion-col size="12">
               <ion-card >
 
                 <ion-item-group>
@@ -75,7 +81,7 @@
 <!-- 
                     <b>P.V:</b> {{data.nombre}} -->
 
-                    <ion-icon slot="start" color="primary" name="storefront"></ion-icon> {{data.nombre}}
+                    <ion-label><ion-icon slot="start" color="primary" name="storefront"></ion-icon>  {{data.nombre}}</ion-label> 
 
                     <ion-button (click)="vender(data.nombre)"   slot="end" color="success" expand="block" shape="round">
                       Asignar

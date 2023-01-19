@@ -39,7 +39,7 @@ export class SucursalPage implements OnInit {
 
   payload: any;
   params:any;
-
+on:any;
   
 
   constructor(private insertPuntoVenta: InsertPuntoDeVentaService ,public alertCtrl: AlertController,private router: Router,private geolocation: Geolocation) { }
@@ -79,6 +79,8 @@ export class SucursalPage implements OnInit {
 
 
  async guardar(){
+
+  this.on= true;
 
   
 
@@ -148,7 +150,11 @@ console.log(params3);
     await this.insertPuntoVenta.InsertPuntoVenta(data2).then(async respuesta => {
       console.log(data2)
       console.log("paso chido", respuesta)
+      
+      this.on= false;
 
+
+      
 
       if (respuesta.status = "000") {
         // alert("Carga realizada con éxito.")
@@ -159,6 +165,19 @@ console.log(params3);
           buttons: ['OK']  
         });  
         await alert.present();  
+
+        this.pvForm = 
+        new FormGroup({
+          nombre: new FormControl('', [Validators.required, Validators.minLength(3)]),
+          dueno: new FormControl('', [Validators.required, Validators.minLength(3)]),
+          apellido: new FormControl('', [Validators.required, Validators.minLength(3)]),
+          telefono: new FormControl('', [Validators.required, Validators.minLength(10)]),
+          telefonos: new FormControl('', [Validators.required, Validators.minLength(10)]),
+          domicilio: new FormControl('', [Validators.required, Validators.minLength(5)]),
+          email: new FormControl('', [Validators.required, Validators.minLength(1),Validators.email]),
+          giro: new FormControl('', [Validators.required, Validators.minLength(1)]),
+        });
+
 
       }
       else {

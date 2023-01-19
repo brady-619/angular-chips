@@ -3,7 +3,7 @@
     <ion-item lines="none">
 
       <ion-title class="ion-text-center">
-        <ion-icon  name="person" color="primary"></ion-icon>   {{this.nombre_global}} 
+        <ion-icon name="person" color="primary"></ion-icon> {{this.nombre_global}}
       </ion-title>
       <ion-button (click)="salir()" expand="block" fill="clear" shape="round">
         Salir
@@ -20,7 +20,7 @@
 
 <ion-content>
 
-    <!-- <ion-grid>
+  <!-- <ion-grid>
       <ion-row *ngFor="let item of data">
 
         <ion-col size="8">
@@ -40,8 +40,8 @@
 
 
 
-        
-      <!--      <ion-label color="dark"><b>Inc. retencion: </b></ion-label>{{item.INCREMENTA_RETENCION}}<br>
+
+  <!--      <ion-label color="dark"><b>Inc. retencion: </b></ion-label>{{item.INCREMENTA_RETENCION}}<br>
         <ion-label color="dark"><b>Inc. ARPU: </b></ion-label>{{item.INCREMENTA_ARPU}} 
           <ion-label color="dark"><b>Impacto: </b></ion-label>{{item.IMPACTO}}<br>
 
@@ -54,9 +54,9 @@
           <ion-label color="dark"><b>a: </b></ion-label>{{item.F_FIN_PRUEBAS_UAT}}<br>
 
           <ion-label color="dark"><b>Go Live: </b></ion-label>{{item.F_INICIO_GO_LIVE}}<br> -->
-        <!-- </ion-card>
+  <!-- </ion-card>
         </ion-col> -->
- <!--
+  <!--
         <ion-col size="6">
           <ion-list>
             <ion-radio-group (ionChange)="cambiar($event,item.idProject)">
@@ -89,80 +89,177 @@
 -->
 
 
-<ion-grid>
-  <ion-row *ngIf="data">
-    <ion-col size="12">
+  <ion-grid>
+    <ion-row >
+      <ion-col size="12">
 
-<ion-card> 
-  <ion-card-content>
-    <ion-card-subtitle> Asignación de los últimos 7 días</ion-card-subtitle>
-    
-  </ion-card-content>
- <!-- <ion-label class="ion-text-wrap">Listado de ventas de los últimos 7 días</ion-label>  -->
+        <ion-card>
+          <ion-card-content>
+            <ion-card-subtitle class="ion-text-center"> Existencias por PDV</ion-card-subtitle>
 
-</ion-card>
+          </ion-card-content>
+          <!-- <ion-label class="ion-text-wrap">Listado de ventas de los últimos 7 días</ion-label>  -->
 
-    </ion-col>
-    
-  </ion-row>
-</ion-grid>
+          <form [formGroup]="pvForm" (ngSubmit)="buscar()" class="form" action="">
+            <ion-item-group>
 
+              <!-- <ion-item-divider>
+                <ion-icon color="primary" slot="start" name="search"></ion-icon>
+                <ion-label position="inline">Punto de venta</ion-label>
+              </ion-item-divider> -->
 
+              <ion-item-divider>
+                <ion-input [(ngModel)]="pv" required formControlName="pv" placeholder="Ingresa PDV">
+                </ion-input>
+                <ion-button [disabled]="!pvForm.valid" type="submit" expand="block" shape="round">
+                  Buscar
+                </ion-button>
+              </ion-item-divider>
 
-<ion-grid>
-  <ion-row *ngIf="data === false">
-    <ion-col size="10">
-
-<ion-card> 
-  <ion-card-content>
-    <ion-card-subtitle> Oh no! Aún no cuentas con ventas registradas</ion-card-subtitle>
-    
-  </ion-card-content>
- <!-- <ion-label class="ion-text-wrap">Listado de ventas de los últimos 7 días</ion-label>  -->
-
-</ion-card>
-
-    </ion-col>
-    
-  </ion-row>
-</ion-grid>
+            </ion-item-group>
+          </form>
+          <ion-item-divider *ngIf="on == true" >
+            <!--  -->
+            <ion-spinner  color="primary" name="circular"></ion-spinner>
+          </ion-item-divider>
 
 
-    
+        </ion-card>
+
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>
+
+
+<!-- 
+  <ion-grid>
+    <ion-row *ngIf="data === false">
+      <ion-col size="10">
+
+        <ion-card>
+          <ion-card-content>
+            <ion-card-subtitle> Oh no! Aún no cuentas con ventas registradas</ion-card-subtitle>
+
+          </ion-card-content>
+
+        </ion-card>
+
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>
 
 
 
-<ion-grid fixed>
-  
-  <ion-row *ngFor="let item of data">
-    <ion-col size="12">
 
-<ion-card>
-  <ion-item-group>
 
-    <ion-item-divider>
-    
-  <label>ICC: {{item.ICCI}}</label>
-</ion-item-divider>
-<ion-item-divider>
-  <label>COMPAÑIA: {{item.COMPANIA}}</label>
-</ion-item-divider>
-<ion-item-divider>
-  <label>PDV: {{item.PV}}</label>
-</ion-item-divider>
-<ion-item-divider>
-  <label>FECHA VENTA: {{item.FECHA_VENTA}}</label>
-</ion-item-divider>
-</ion-item-group>
 
-   
+  <ion-grid fixed>
 
-</ion-card>
+    <ion-row *ngFor="let item of data">
+      <ion-col size="12">
 
-    </ion-col>
-    
-  </ion-row>
-</ion-grid>
+        <ion-card>
+          <ion-item-group>
+
+            <ion-item-divider>
+
+              <label>ICC: {{item.ICCI}}</label>
+            </ion-item-divider>
+            <ion-item-divider>
+              <label>COMPAÑIA: {{item.COMPANIA}}</label>
+            </ion-item-divider>
+            <ion-item-divider>
+              <label>PDV: {{item.PV}}</label>
+            </ion-item-divider>
+            <ion-item-divider>
+              <label>FECHA VENTA: {{item.FECHA_VENTA}}</label>
+            </ion-item-divider>
+          </ion-item-group>
+
+
+
+        </ion-card>
+
+      </ion-col>
+
+    </ion-row>
+  </ion-grid> -->
+
+
+
+
+        
+
+                          <!-- <ion-card *ngIf="data">
+                    <ion-item>
+                      <ion-title >Sucursales</ion-title>
+                    </ion-item>
+                  </ion-card>
+                  <br> -->
+
+
+
+
+        <ion-grid fixed>
+          <ion-row *ngFor="let data of data">
+            <ion-col size="12">
+              <ion-card >
+
+                <ion-item-group>
+
+                  <ion-item-divider>
+<!-- 
+                    <b>P.V:</b> {{data.nombre}} -->
+
+                    <ion-label><ion-icon slot="start" color="danger" name="storefront-outline"></ion-icon> PDV: {{data.PV}}</ion-label> 
+
+                    <!-- <ion-button (click)="vender(data.nombre)"   slot="end" color="success" expand="block" shape="round">
+                      Asignar
+                    </ion-button> -->
+
+
+
+                  </ion-item-divider>
+ <ion-item-divider>
+<ion-label> EXISTENCIAS: {{data.total}}</ion-label>
+               
+              </ion-item-divider>
+
+                  <ion-item-divider>
+                    AT&T: {{data.ATT}} 
+                    BAIT: {{data.BAIT}}
+                    MOVISTAR: {{data.MOVISTAR}}
+                    UNEFON: {{data.UNEFON}}
+                  </ion-item-divider>
+                </ion-item-group>
+
+                <!-- <ion-item-group>
+
+                  <ion-item-divider>
+
+                    <ion-button color="success" expand="block" shape="round">
+                      Vender
+                    </ion-button>
+                  </ion-item-divider>
+                </ion-item-group> -->
+
+
+
+
+              </ion-card>
+              
+            </ion-col>
+
+
+
+          </ion-row>
+        </ion-grid>
+
+
+
+
 
 
 

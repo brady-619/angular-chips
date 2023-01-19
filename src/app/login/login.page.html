@@ -45,15 +45,28 @@
                 <ion-input required formControlName="password" type="password" placeholder=" Ingresa tu password"></ion-input>
                 </ion-item-divider>
               
-              </ion-item-group>
-      
-      <br>
+              
+
+                <ion-item-divider *ngIf="on == true">
+              <ion-spinner   color="primary" name="circular"></ion-spinner>
+            </ion-item-divider>
+
+      </ion-item-group>
+    
       
               <ion-button [disabled]="!loginForm.valid" type="submit" expand="block" shape="round">
                 Iniciar Sesión
               </ion-button>
             </form>
           </ion-card-content>
+
+
+        
+
+            
+             
+        
+
 
 
 

@@ -20,6 +20,7 @@ import { GetSearchIccScanService } from 'src/app/services/get-search-icc-scan.se
   styleUrls: ['./ventas-sims.page.scss'],
 })
 export class VentasSimsPage implements OnInit {
+  
 
   constructor(private getsearchicc: GetSearchIccScanService, private getsims5: GetSims5Service, private insertLogSims : InsertLogVentaSimsService, private updateventasim: UpdateVentaSimService, private router: Router, private simsAtt: GetSimsAVenderAttService, public alertCtrl: AlertController,private barcodeScanner: BarcodeScanner ) { }
 
@@ -29,7 +30,7 @@ export class VentasSimsPage implements OnInit {
   sims: any;
   num_sim:any;
   sim:any;
-
+  on: any;
 
 
   code: any;
@@ -65,6 +66,8 @@ export class VentasSimsPage implements OnInit {
   async att() {
     // console.log("Ingresaste a AT&T")
 
+    this.on= true;
+
 
     this.vendedor = await localStorage.getItem("nombre_global")
 
@@ -83,6 +86,8 @@ export class VentasSimsPage implements OnInit {
 
       this.sims = resp.data;
 
+      this.on= false;
+
     }).catch(error => {
       /* Código a realizar cuando se rechaza la promesa */
       // console.log("NO paso chido", error)
@@ -95,7 +100,7 @@ export class VentasSimsPage implements OnInit {
 
   async bait() {
     // console.log("Ingresaste a BAIT")
-
+    this.on= true;
 
     this.vendedor = await localStorage.getItem("nombre_global")
 
@@ -114,6 +119,8 @@ export class VentasSimsPage implements OnInit {
 
       this.sims = resp.data;
 
+      this.on= false;
+
     }).catch(error => {
       /* Código a realizar cuando se rechaza la promesa */
       // console.log("NO paso chido", error)
@@ -122,7 +129,7 @@ export class VentasSimsPage implements OnInit {
   }
   async movistar() {
     // console.log("Ingresaste a MOVISTAR")
-
+    this.on= true;
 
     this.vendedor = await localStorage.getItem("nombre_global")
 
@@ -141,6 +148,8 @@ export class VentasSimsPage implements OnInit {
 
       this.sims = resp.data;
 
+      this.on= false;
+
     }).catch(error => {
       /* Código a realizar cuando se rechaza la promesa */
       console.log("NO paso chido", error)
@@ -149,6 +158,8 @@ export class VentasSimsPage implements OnInit {
   }
   async unefon() {
     // console.log("Ingresaste a UNEFON")
+
+    this.on= true;
 
 
     this.vendedor = await localStorage.getItem("nombre_global")
@@ -168,6 +179,8 @@ export class VentasSimsPage implements OnInit {
 
       this.sims = resp.data;
 
+      this.on= false;
+
     }).catch(error => {
       /* Código a realizar cuando se rechaza la promesa */
       // console.log("NO paso chido", error)
@@ -177,6 +190,8 @@ export class VentasSimsPage implements OnInit {
 
 
   async vender(ICCI: any, DN:any, COMPANIA:any) {
+
+  
 
     // OBTENEMOS INFO A REQUEST LOG
     // console.log("Sim:", ICCI, DN,COMPANIA);
@@ -225,7 +240,7 @@ export class VentasSimsPage implements OnInit {
 
             this.vendedor = await localStorage.getItem("nombre_global")
             // console.log("Vendedor:", this.vendedor);
-
+            this.on= true;
 
 
 
@@ -273,9 +288,11 @@ export class VentasSimsPage implements OnInit {
               await alert.present();
 
               // refresh
-              this.att();
+              // this.att() maljaja;
 
+              this.on= false;
 
+              this.sims = false;
 
               // this.sims = resp.data;
 
@@ -325,6 +342,8 @@ export class VentasSimsPage implements OnInit {
 
 async buscar() {
 
+  this.on= true;
+
 console.log(this.num_sim);
 this.vendedor = await localStorage.getItem("nombre_global")
 console.log(this.vendedor);
@@ -343,7 +362,7 @@ await this.getsims5.GetSims5(params5).then(async resp => {
 
   if (this.sims == undefined || this.sims == false) {
     const alert = await this.alertCtrl.create({
-      header: 'No se encontro SIM con ICC:' + this.num_sim,
+      header: 'No se encontró SIM con ICC terminación: ' + this.num_sim+'F',
       // subHeader: 'SubTitle',  
       // message: 'This is an alert message',  
       buttons: ['OK']
@@ -351,12 +370,16 @@ await this.getsims5.GetSims5(params5).then(async resp => {
     this.sims = false;
 
     await alert.present();
+
+    this.on= false;
   
   }
   else{
     
 
   this.sims = resp.data;
+
+  this.on= false;
   }
 
 
@@ -399,6 +422,8 @@ async scan(){
 this.vendedor = await localStorage.getItem("nombre_global")
 // console.log(this.vendedor);
 
+this.on= true;
+
 await this.barcodeScanner.scan().then(async barcodeData => {
     console.log('Barcode data', barcodeData);
     this.code = barcodeData.text;
@@ -430,11 +455,13 @@ const paramsqr = {
         this.sims = false;
 
         await alert.present();
+
+        this.on= false;
       
       }
       else{
         
-
+        this.on= false;
       this.sims = resp.data;
       }
 

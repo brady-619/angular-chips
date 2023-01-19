@@ -80,6 +80,10 @@
 
     </ion-list>
     <br>
+    <ion-item-divider *ngIf="on == true" >
+      <!--  -->
+      <ion-spinner  color="primary" name="circular"></ion-spinner>
+    </ion-item-divider>
   <!-- <ion-button  (click)="guardar(nombre,dueno,apellido,tel1,tel2,domicilio,email,giro)" expand="block"  shape="round"> -->
     <ion-button [disabled]="!pvForm.valid" type="submit" expand="block" shape="round">
     Guardar

@@ -15,7 +15,7 @@
 
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content >
 
 
   <ion-grid fixed>
@@ -49,6 +49,13 @@
           <ion-button (click)="scan()" expand="block"   shape="round">
             Scan
            </ion-button>
+
+
+           <ion-item-divider *ngIf="on == true" >
+            <!--  -->
+            <ion-spinner  color="primary" name="circular"></ion-spinner>
+          </ion-item-divider>
+
 
         </ion-card>
 
