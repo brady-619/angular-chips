@@ -9,6 +9,9 @@ import { UpdateVentaSimService } from 'src/app/services/update-venta-sim.service
 import { GetSims5Service } from 'src/app/services/get-sims-5.service';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { GetSearchIccScanService } from 'src/app/services/get-search-icc-scan.service';
+import { GetSimsContadorVendedorService }  from '../services/get-sims-contador-vendedor.service';
+import { NgIf } from '@angular/common';
+
 
 //npm i phonegap-plugin-barcodescanner --force 
 // npm i @ionic-native/barcode-scanner --force  
@@ -22,7 +25,7 @@ import { GetSearchIccScanService } from 'src/app/services/get-search-icc-scan.se
 export class VentasSimsPage implements OnInit {
   
 
-  constructor(private getsearchicc: GetSearchIccScanService, private getsims5: GetSims5Service, private insertLogSims : InsertLogVentaSimsService, private updateventasim: UpdateVentaSimService, private router: Router, private simsAtt: GetSimsAVenderAttService, public alertCtrl: AlertController,private barcodeScanner: BarcodeScanner ) { }
+  constructor(private getsimscontador: GetSimsContadorVendedorService,private getsearchicc: GetSearchIccScanService, private getsims5: GetSims5Service, private insertLogSims : InsertLogVentaSimsService, private updateventasim: UpdateVentaSimService, private router: Router, private simsAtt: GetSimsAVenderAttService, public alertCtrl: AlertController,private barcodeScanner: BarcodeScanner ) { }
 
   pv: any;
   data: any;
@@ -31,6 +34,7 @@ export class VentasSimsPage implements OnInit {
   num_sim:any;
   sim:any;
   on: any;
+  simscontador:any;
 
 
   code: any;
@@ -58,135 +62,302 @@ export class VentasSimsPage implements OnInit {
   async ionViewWillEnter() {
     this.pv = await localStorage.getItem("pv_a_vender")
     // console.log("Pv a vender", this.pv)
-  }
-
-
-
-
-  async att() {
-    // console.log("Ingresaste a AT&T")
-
-    this.on= true;
-
 
     this.vendedor = await localStorage.getItem("nombre_global")
 
-    // this.pv = await localStorage.getItem("pv_a_vender")
 
-    const params = {
-      vendedor: this.vendedor, compania: 'AT&T'
-
+    const paramsvendedor = {
+      vendedor: this.vendedor
     }
 
-    // console.log("para", params)
 
-    await this.simsAtt.GetSimsAVenderAtt(params).then(resp => {
+    await this.getsimscontador.GetSimsContador(paramsvendedor).then(async resp => {
 
-      // console.log("resp", resp)
+       console.log("resp", resp)
+    
+      this.simscontador = resp.data;
+    
+      // if (this.sims == undefined || this.sims == false) {
+      //   const alert = await this.alertCtrl.create({
+      //     header: 'No se encontró SIM con ICC terminación: ' + this.num_sim+'F',
+      //     // subHeader: 'SubTitle',  
+      //     // message: 'This is an alert message',  
+      //     buttons: ['OK']
+      //   });
+      //   this.sims = false;
+    
+      //   await alert.present();
+    
+      //   this.on= false;
+      
+      // }
 
-      this.sims = resp.data;
 
-      this.on= false;
+  });
 
-    }).catch(error => {
-      /* Código a realizar cuando se rechaza la promesa */
-      // console.log("NO paso chido", error)
-    });
+
+
 
 
 
 
   }
 
-  async bait() {
-    // console.log("Ingresaste a BAIT")
-    this.on= true;
+async envio(proveedor:any){
+  console.log("Diste lick en",proveedor);
 
-    this.vendedor = await localStorage.getItem("nombre_global")
+if(proveedor==='AT&T'){
+  // console.log("Ingresaste a AT&T")
+  this.on= true;
 
-    // this.pv = await localStorage.getItem("pv_a_vender")
 
-    const params = {
-      vendedor: this.vendedor, compania: 'BAIT'
+  this.vendedor = await localStorage.getItem("nombre_global")
 
-    }
+  // this.pv = await localStorage.getItem("pv_a_vender")
 
-    // console.log("para", params)
-
-    await this.simsAtt.GetSimsAVenderAtt(params).then(resp => {
-
-      // console.log("resp", resp)
-
-      this.sims = resp.data;
-
-      this.on= false;
-
-    }).catch(error => {
-      /* Código a realizar cuando se rechaza la promesa */
-      // console.log("NO paso chido", error)
-    });
+  const params = {
+    vendedor: this.vendedor, compania: 'AT&T'
 
   }
-  async movistar() {
-    // console.log("Ingresaste a MOVISTAR")
-    this.on= true;
 
-    this.vendedor = await localStorage.getItem("nombre_global")
+  // console.log("para", params)
 
-    // this.pv = await localStorage.getItem("pv_a_vender")
+  await this.simsAtt.GetSimsAVenderAtt(params).then(resp => {
 
-    const params = {
-      vendedor: this.vendedor, compania: 'MOVISTAR'
+    // console.log("resp", resp)
 
-    }
+    this.sims = resp.data;
 
-    // console.log("para", params)
+    this.on= false;
 
-    await this.simsAtt.GetSimsAVenderAtt(params).then(resp => {
+  }).catch(error => {
+    /* Código a realizar cuando se rechaza la promesa */
+    // console.log("NO paso chido", error)
+  });
 
-      // console.log("resp", resp)
+}
+else if (proveedor==='BAIT'){
+  // console.log("Ingresaste a BAIT")
+  this.on= true;
 
-      this.sims = resp.data;
+  this.vendedor = await localStorage.getItem("nombre_global")
 
-      this.on= false;
+  // this.pv = await localStorage.getItem("pv_a_vender")
 
-    }).catch(error => {
-      /* Código a realizar cuando se rechaza la promesa */
-      console.log("NO paso chido", error)
-    });
-
-  }
-  async unefon() {
-    // console.log("Ingresaste a UNEFON")
-
-    this.on= true;
-
-
-    this.vendedor = await localStorage.getItem("nombre_global")
-
-    // this.pv = await localStorage.getItem("pv_a_vender")
-
-    const params = {
-      vendedor: this.vendedor, compania: 'UNEFON'
-
-    }
-
-    // console.log("para", params)
-
-    await this.simsAtt.GetSimsAVenderAtt(params).then(resp => {
-
-      // console.log("resp", resp)
-
-      this.sims = resp.data;
-
-      this.on= false;
-
-    }).catch(error => {
-      /* Código a realizar cuando se rechaza la promesa */
-      // console.log("NO paso chido", error)
-    });
+  const params = {
+    vendedor: this.vendedor, compania: 'BAIT'
 
   }
+
+  // console.log("para", params)
+
+  await this.simsAtt.GetSimsAVenderAtt(params).then(resp => {
+
+    // console.log("resp", resp)
+
+    this.sims = resp.data;
+
+    this.on= false;
+
+  }).catch(error => {
+    /* Código a realizar cuando se rechaza la promesa */
+    // console.log("NO paso chido", error)
+  });
+
+}
+
+else if (proveedor==='MOVISTAR'){
+   // console.log("Ingresaste a MOVISTAR")
+   this.on= true;
+
+   this.vendedor = await localStorage.getItem("nombre_global")
+
+   // this.pv = await localStorage.getItem("pv_a_vender")
+
+   const params = {
+     vendedor: this.vendedor, compania: 'MOVISTAR'
+
+   }
+
+   // console.log("para", params)
+
+   await this.simsAtt.GetSimsAVenderAtt(params).then(resp => {
+
+     // console.log("resp", resp)
+
+     this.sims = resp.data;
+
+     this.on= false;
+
+   }).catch(error => {
+     /* Código a realizar cuando se rechaza la promesa */
+     console.log("NO paso chido", error)
+   });
+
+
+}
+else if (proveedor==='UNEFON'){
+  // console.log("Ingresaste a UNEFON")
+
+  this.on= true;
+
+
+  this.vendedor = await localStorage.getItem("nombre_global")
+
+  // this.pv = await localStorage.getItem("pv_a_vender")
+
+  const params = {
+    vendedor: this.vendedor, compania: 'UNEFON'
+
+  }
+
+  // console.log("para", params)
+
+  await this.simsAtt.GetSimsAVenderAtt(params).then(resp => {
+
+    // console.log("resp", resp)
+
+    this.sims = resp.data;
+
+    this.on= false;
+
+  }).catch(error => {
+    /* Código a realizar cuando se rechaza la promesa */
+    // console.log("NO paso chido", error)
+  });
+
+
+}
+
+
+  
+}
+
+
+  // async att() {
+  //   // console.log("Ingresaste a AT&T")
+
+  //   this.on= true;
+
+
+  //   this.vendedor = await localStorage.getItem("nombre_global")
+
+  //   // this.pv = await localStorage.getItem("pv_a_vender")
+
+  //   const params = {
+  //     vendedor: this.vendedor, compania: 'AT&T'
+
+  //   }
+
+  //   // console.log("para", params)
+
+  //   await this.simsAtt.GetSimsAVenderAtt(params).then(resp => {
+
+  //     // console.log("resp", resp)
+
+  //     this.sims = resp.data;
+
+  //     this.on= false;
+
+  //   }).catch(error => {
+  //     /* Código a realizar cuando se rechaza la promesa */
+  //     // console.log("NO paso chido", error)
+  //   });
+
+
+
+
+  // }
+
+  // async bait() {
+  //   // console.log("Ingresaste a BAIT")
+  //   this.on= true;
+
+  //   this.vendedor = await localStorage.getItem("nombre_global")
+
+  //   // this.pv = await localStorage.getItem("pv_a_vender")
+
+  //   const params = {
+  //     vendedor: this.vendedor, compania: 'BAIT'
+
+  //   }
+
+  //   // console.log("para", params)
+
+  //   await this.simsAtt.GetSimsAVenderAtt(params).then(resp => {
+
+  //     // console.log("resp", resp)
+
+  //     this.sims = resp.data;
+
+  //     this.on= false;
+
+  //   }).catch(error => {
+  //     /* Código a realizar cuando se rechaza la promesa */
+  //     // console.log("NO paso chido", error)
+  //   });
+
+  // }
+  // async movistar() {
+  //   // console.log("Ingresaste a MOVISTAR")
+  //   this.on= true;
+
+  //   this.vendedor = await localStorage.getItem("nombre_global")
+
+  //   // this.pv = await localStorage.getItem("pv_a_vender")
+
+  //   const params = {
+  //     vendedor: this.vendedor, compania: 'MOVISTAR'
+
+  //   }
+
+  //   // console.log("para", params)
+
+  //   await this.simsAtt.GetSimsAVenderAtt(params).then(resp => {
+
+  //     // console.log("resp", resp)
+
+  //     this.sims = resp.data;
+
+  //     this.on= false;
+
+  //   }).catch(error => {
+  //     /* Código a realizar cuando se rechaza la promesa */
+  //     console.log("NO paso chido", error)
+  //   });
+
+  // }
+  // async unefon() {
+  //   // console.log("Ingresaste a UNEFON")
+
+  //   this.on= true;
+
+
+  //   this.vendedor = await localStorage.getItem("nombre_global")
+
+  //   // this.pv = await localStorage.getItem("pv_a_vender")
+
+  //   const params = {
+  //     vendedor: this.vendedor, compania: 'UNEFON'
+
+  //   }
+
+  //   // console.log("para", params)
+
+  //   await this.simsAtt.GetSimsAVenderAtt(params).then(resp => {
+
+  //     // console.log("resp", resp)
+
+  //     this.sims = resp.data;
+
+  //     this.on= false;
+
+  //   }).catch(error => {
+  //     /* Código a realizar cuando se rechaza la promesa */
+  //     // console.log("NO paso chido", error)
+  //   });
+
+  // }
 
 
   async vender(ICCI: any, DN:any, COMPANIA:any) {

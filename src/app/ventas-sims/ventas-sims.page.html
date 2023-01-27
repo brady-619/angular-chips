@@ -68,7 +68,7 @@
 
 
 
-
+<!-- 
 
   <ion-grid fixed>
     <ion-row>
@@ -86,9 +86,44 @@
         </ion-button></ion-col>
     </ion-row>
   </ion-grid>
-
+ -->
 
   
+ <ion-grid fixed>
+  <ion-row  >
+    <ion-col size="6" *ngFor="let data of simscontador">
+      
+      
+      
+          <!-- <ion-item-group>
+
+            <ion-item-divider>
+              <ion-icon slot="start" color="primary" name="car"></ion-icon> COMPANIA: {{data.COMPANIA}}
+EXISTENCIAS: {{data.CONTADOR}}
+    </ion-item-divider>
+  </ion-item-group> -->
+       
+  
+  
+  <ion-button expand="block" (click)="envio(data.COMPANIA)" shape="round">
+    {{data.COMPANIA}}
+    EXISTENCIAS: {{data.CONTADOR}}
+
+    
+  </ion-button>
+
+
+
+
+
+
+
+    </ion-col>
+    
+  </ion-row>
+</ion-grid>
+
+
 
 
 
